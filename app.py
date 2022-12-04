@@ -1,6 +1,4 @@
-#test file
-
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request #test file
 from http import HTTPStatus
 
 app = Flask(__name__)
