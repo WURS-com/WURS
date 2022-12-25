@@ -15,7 +15,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__)
 app.config[
     "SQLALCHEMY_DATABASE_URI"
-] = "postgresql://postgres:test@localhost/room_reservations"
+] = "postgresql://postgres:test@db/room_reservations"
 app.config["JWT_SECRET_KEY"] = "secret"
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=30)
 
@@ -175,4 +175,4 @@ def reserve():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0")
