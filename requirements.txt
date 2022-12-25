@@ -17,7 +17,7 @@ Flask-JWT-Extended==4.4.4
 Flask-SQLAlchemy==3.0.2
 greenlet==2.0.1
 html5lib==1.1
-httpie==1.0.2
+httpie==3.1.0
 idna==3.4
 itsdangerous==2.1.2
 jaraco.classes==3.2.3
