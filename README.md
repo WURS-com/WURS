@@ -111,7 +111,7 @@ or
 | `start_time`      | `%H:%M` | **Required**. Begining of reservation Hour:Minute |
 | `end_time`      | `%H:%M` | **Required**. Ending of reservation Hour:Minute |
 | `date`      | `%Y-%m-%d` | **Required**. Date of reservation |
-| `resv_descr`      | `string` | **Required**. Description of reservation |
+| `resv_descr`      | `string` | **Optional**. Description of reservation |
 | `occupancy`      | `integer` | **Required**. How many people will attend |
 | `repeat`      | `bool` | **Required**. Do you want your reservation to repeat |
 | `repeat_interval`      | `integer` | **Required**. Do you want you reservation to repeat every week, 2 weeks, or more |
