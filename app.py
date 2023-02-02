@@ -1,4 +1,4 @@
-from datetime import timedelta, datetime, time
+from datetime import timedelta, datetime
 import datetime
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
@@ -7,7 +7,6 @@ from flask_jwt_extended import (
     jwt_required,
     create_access_token,
     get_jwt_identity,
-    verify_jwt_in_request,
 )
 
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -172,6 +171,27 @@ def reserve():
     db.session.add(reservation)
     db.session.commit()
     return jsonify({"message": "Reservation created successfully"}), 201
+
+@app.route('/reservations/<int:reservation_id>', methods=['DELETE'])
+@jwt_required()
+def delete_reservation(reservation_id):
+    user_id = get_jwt_identity()
+    reservation = Reservation.query.get(reservation_id)
+
+    # Check if the reservation exists
+    if not reservation:
+        return jsonify({'message': 'Reservation not found'}), 404
+
+    # Check if the user has permission to delete the reservation
+    if reservation.user_id != user_id:
+        return jsonify({'message': 'Unauthorized access'}), 401
+
+    # Delete the reservation
+    db.session.delete(reservation)
+    db.session.commit()
+
+    return jsonify({'message': 'Reservation deleted successfully'}), 200
+
 
 
 if __name__ == "__main__":
