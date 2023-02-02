@@ -134,10 +134,8 @@ def reserve():
             jsonify({"message": "Requested occupancy is greater than room capacity"}),
             400,
         )
-
     if not room:
         return jsonify({"message": "Room does not exist"}), 404
-
     # Convert start_time and end_time to datetime.time objects
     start_time = datetime.datetime.strptime(data["start_time"], "%H:%M").time()
     end_time = datetime.datetime.strptime(data["end_time"], "%H:%M").time()
@@ -172,6 +170,25 @@ def reserve():
     db.session.add(reservation)
     db.session.commit()
     return jsonify({"message": "Reservation created successfully"}), 201
+
+
+@app.route("/reservations/<int:reservation_id>", methods=["DELETE"])
+@jwt_required()
+def delete_reservation(reservation_id):
+    user_id = get_jwt_identity()
+    reservation = Reservation.query.get(reservation_id)
+
+    # Check if the reservation exists
+    if not reservation:
+        return jsonify({"message": "Reservation not found"}), 404
+    # Check if the user has permission to delete the reservation
+    if reservation.user_id != user_id:
+        return jsonify({"message": "Unauthorized access"}), 401
+    # Delete the reservation
+    db.session.delete(reservation)
+    db.session.commit()
+
+    return jsonify({"message": "Reservation deleted successfully"}), 200
 
 
 if __name__ == "__main__":
