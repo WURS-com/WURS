@@ -57,6 +57,12 @@ class Room(db.Model):
 with app.app_context():
     db.create_all()
 
+def create_example_rooms():
+    room1 = Room(room_id='R101', building_id='B1', capacity=10, room_descr='Meeting Room')
+    room2 = Room(room_id='R102', building_id='B1', capacity=20, room_descr='Conference Room')
+    room3 = Room(room_id='R103', building_id='B2', capacity=30, room_descr='Training Room')
+    db.session.add_all([room1, room2, room3])
+    db.session.commit()
 
 @app.route("/register", methods=["POST"])
 def register():
@@ -192,3 +198,4 @@ def delete_reservation(reservation_id):
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
+    #create_example_rooms()
