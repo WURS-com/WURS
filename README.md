@@ -116,7 +116,7 @@ or
 | `repeat`      | `bool` | **Required**. Do you want your reservation to repeat |
 | `repeat_interval`      | `integer` | **Required**. Do you want you reservation to repeat every week, 2 weeks, or more |
 
-### Create reservation
+### Delete reservation
 
 ```http
   DELETE /reservations/{reservation_id}
