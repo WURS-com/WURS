@@ -116,10 +116,15 @@ or
 | `repeat`      | `bool` | **Required**. Do you want your reservation to repeat |
 | `repeat_interval`      | `integer` | **Required**. Do you want you reservation to repeat every week, 2 weeks, or more |
 
+### Create reservation
 
-
-
-
+```http
+  DELETE /reservations/{reservation_id}
+```
+#### Authentication
+| Parameter | Value     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `API-Key`      | `Bearer $YOUR_API_KEY` | **Required**. Your api key recieved after logging |
 
 ## Usage/Examples
 
@@ -172,6 +177,10 @@ curl -X GET \
 curl -X GET \
   http://localhost:5000/reservations \
   -H 'Authorization: Bearer <ACCESS_TOKEN>'
+```
+#### Delete a reservation
+```bash
+curl -X DELETE -H "Authorization: Bearer <ACCESS_TOKEN>" "http://localhost:5000/reservations/{reservation_id}"
 ```
 
 
