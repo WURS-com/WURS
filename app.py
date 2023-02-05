@@ -129,13 +129,13 @@ def reserve():
     user_id = get_jwt_identity()
     user = User.query.get(user_id)
     room = Room.query.get(data["room_id"])
+    if not room:
+        return jsonify({"message": "Room does not exist"}), 404
     if data["occupancy"] > room.capacity:
         return (
             jsonify({"message": "Requested occupancy is greater than room capacity"}),
             400,
         )
-    if not room:
-        return jsonify({"message": "Room does not exist"}), 404
     # Convert start_time and end_time to datetime.time objects
     start_time = datetime.datetime.strptime(data["start_time"], "%H:%M").time()
     end_time = datetime.datetime.strptime(data["end_time"], "%H:%M").time()
