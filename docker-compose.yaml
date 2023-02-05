@@ -5,6 +5,7 @@ services:
     image: postgres:14.2-alpine
     volumes:
       - ./data/db:/var/lib/postgresql/data
+      - ./dump_db.sql:/docker-entrypoint-initdb.d/dummy_dump.sql
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
