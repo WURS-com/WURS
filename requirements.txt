@@ -55,4 +55,4 @@ urllib3==1.26.12
 virtualenv==20.16.6
 virtualenv-clone==0.5.7
 webencodings==0.5.1
-Werkzeug==2.2.2
+Werkzeug==2.2.3
